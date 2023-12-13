@@ -1,10 +1,12 @@
 import yaml
 
+from src.game.objects.game_object import GameObject
 
-class Player:
-    def __init__(self, name, coords, colors):
+
+class Player(GameObject):
+    def __init__(self, name, colors, x, y, z):
+        super().__init__(x, y, z)
         self.name = name
-        self.coords = coords
         self.colors = colors
 
     def __eq__(self, other):

@@ -1,10 +1,12 @@
 import pygame
 
-from src.client.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT
+from src.game.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT
+from src.game.objects.game_objects import GameObjects
 
 
 class GameController:
     def __init__(self, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=60):
+        super().__init__()
         pygame.init()
 
         self.width = size[0]
@@ -21,7 +23,7 @@ class GameController:
     def run(self):
         while self.running:
 
-            # events0
+            # events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
@@ -30,10 +32,10 @@ class GameController:
             self.screen.fill('black')
 
             # draw scene background
-            self.draw_scene_background()
+            self.draw_map()
 
             # draw everything
-            self.draw_scene_objects()
+            self.draw_objects()
 
             # apply filter on final screen
             self.apply_screen_filter()
@@ -50,12 +52,13 @@ class GameController:
         """
         pass
 
-    def draw_players(self):
+    def draw_objects(self):
         """
         Draws all objects.
         :return:
         """
-        pass
+        game_objects = GameObjects()
+        game_objects.draw()
 
     def apply_screen_filter(self):
         """
