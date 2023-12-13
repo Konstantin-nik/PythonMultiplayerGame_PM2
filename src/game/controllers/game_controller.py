@@ -1,10 +1,12 @@
+from threading import Thread
+
 import pygame
 
 from src.game.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT
 from src.game.objects.game_objects import GameObjects
 
 
-class GameController:
+class GameController(Thread):
     def __init__(self, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=60):
         super().__init__()
         pygame.init()
