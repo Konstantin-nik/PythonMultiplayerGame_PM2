@@ -1,4 +1,5 @@
+from src.client.controllers.game_controller import GameController
 
-
-
-if __name__ = "__maint__":
+if __name__ == "__main__":
+    game = GameController()
+    game.run()
