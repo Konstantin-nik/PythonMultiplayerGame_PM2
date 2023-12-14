@@ -1,11 +1,14 @@
+from socket import socket
+
 import yaml
 
 from src.game.objects.game_object import GameObject
 
 
 class Player(GameObject):
-    def __init__(self, name, colors, x, y, z):
+    def __init__(self, client_socket: socket, name: str, colors, x: float, y: float, z: int):
         super().__init__(x, y, z)
+        self.client_socket = client_socket
         self.name = name
         self.colors = colors
 

@@ -1,19 +1,23 @@
-from threading import Thread
+from threading import Thread, Lock
 
 import pygame
 
+from src.client.actions import MoveAction, Direction
+from src.client.client_handler import ClientHandler
 from src.game.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT
 from src.game.objects.game_objects import GameObjects
 
 
 class GameController(Thread):
-    def __init__(self, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=60):
+    def __init__(self, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=60, game_objects_lock=Lock):
         super().__init__()
         pygame.init()
 
+        self.game_objects_lock = game_objects_lock
+
         self.width = size[0]
         self.height = size[1]
-        self.center = pygame.Vector2(self.width//2, self.height//2)
+        self.center = pygame.Vector2(self.width // 2, self.height // 2)
 
         # pygame setting
         self.screen = pygame.display.set_mode(size)
@@ -29,6 +33,17 @@ class GameController(Thread):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+                # TODO: based on player input send actions to server
+                if event.type == pygame.KEYDOWN:
+                    client_handler = ClientHandler()
+                    if event.key == pygame.K_w:
+                        client_handler.send(MoveAction(Direction.UP))
+                    elif event.key == pygame.K_a:
+                        client_handler.send(MoveAction(Direction.LEFT))
+                    elif event.key == pygame.K_s:
+                        client_handler.send(MoveAction(Direction.DOWN))
+                    elif event.key == pygame.K_d:
+                        client_handler.send(MoveAction(Direction.RIGHT))
 
             # clean screen
             self.screen.fill('black')
@@ -46,6 +61,8 @@ class GameController(Thread):
             self.clock.tick(self.ticks)
 
         pygame.quit()
+        client_handler = ClientHandler()
+        client_handler.close()
 
     def draw_map(self):
         """
@@ -59,8 +76,9 @@ class GameController(Thread):
         Draws all objects.
         :return:
         """
-        game_objects = GameObjects()
-        game_objects.draw()
+        with self.game_objects_lock:
+            game_objects = GameObjects()
+            game_objects.draw()
 
     def apply_screen_filter(self):
         """
@@ -68,4 +86,3 @@ class GameController(Thread):
         :return:
         """
         pass
-

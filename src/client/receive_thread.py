@@ -1,13 +1,14 @@
-from threading import Lock, Thread
 from socket import socket
+from threading import Lock, Thread
+
+from src.game.objects.game_objects import GameObjects
 
 
 class ReceiveThread(Thread):
-    def __init__(self, client_socket: socket, game_state_lock: Lock):
+    def __init__(self, client_socket: socket, game_objects_lock: Lock):
         Thread.__init__(self)
         self.client_socket = client_socket
-        self.game_state = game_state
-        self.game_state_lock = game_state_lock
+        self.game_objects_lock = game_objects_lock
 
     def run(self):
         while True:
@@ -15,7 +16,9 @@ class ReceiveThread(Thread):
             if not data:
                 break
 
-            with self.game_state_lock:
-                self.game_state.update_state(data)
+            game_objects = GameObjects()
+
+            with self.game_objects_lock:
+                game_objects.update_objects(data)
 
         self.client_socket.close()

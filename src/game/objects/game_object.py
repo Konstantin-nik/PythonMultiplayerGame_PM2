@@ -1,7 +1,5 @@
-
-
 class GameObject:
-    def __init__(self, x = 0, y = 0, z = 0):
+    def __init__(self, x=0, y=0, z=0):
         self.x = x
         self.y = y
         self.z = z
@@ -17,3 +15,7 @@ class GameObject:
 
     def __gt__(self, other):
         return self.z > other.z
+
+    def draw(self):
+        # TODO: If object has something to draw, then draw it on screen
+        pass
