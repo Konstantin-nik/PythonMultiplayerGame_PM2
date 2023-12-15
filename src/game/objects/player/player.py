@@ -30,7 +30,6 @@ class Player(GameObject):
 if __name__ == '__main__':
     game = GameController()
     game_objects = GameObjects()
-    game_objects.init()
     player_1 = Player(name='Super_Stepa', x=game.center.x, y=game.center.y,
                       colors=(random.sample(range(6), 3)))
 

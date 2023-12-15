@@ -1,8 +1,10 @@
+import random
 from socket import socket
 from threading import Thread, Lock
 
 from src.client.actions import Action
 from src.game.objects.game_objects import GameObjects
+from src.game.objects.player.player import Player
 
 
 class ClientThread(Thread):
