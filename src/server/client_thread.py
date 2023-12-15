@@ -8,7 +8,7 @@ from src.game.objects.game_objects import GameObjects
 class ClientThread(Thread):
     def __init__(self, client_socket: socket, client_list: list[socket], client_list_lock: Lock,
                  game_objects_lock: Lock):
-        Thread.__init__(self)
+        super().__init__()
         self.client_socket = client_socket
         self.client_list = client_list
         self.client_list_lock = client_list_lock
@@ -17,6 +17,8 @@ class ClientThread(Thread):
     def run(self):
         while True:
             data = self.client_socket.recv(2048)
+            if not data:
+                break
 
             action = Action.from_yaml(data)
             with self.game_objects_lock:

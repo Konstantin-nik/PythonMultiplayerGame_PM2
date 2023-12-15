@@ -9,7 +9,7 @@ from src.game.objects.game_objects import GameObjects
 
 
 class GameController(Thread):
-    def __init__(self, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=TICKS, game_objects_lock=Lock):
+    def __init__(self, *,  game_objects_lock: Lock, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=TICKS):
         super().__init__()
         pygame.init()
 
@@ -79,8 +79,11 @@ class GameController(Thread):
         Draws all objects.
         :return:
         """
-        game_objects = GameObjects()
-        game_objects.draw(self.screen)
+        with self.game_objects_lock:
+            game_objects = GameObjects()
+            game_objects.draw(self.screen)
+        # game_objects = GameObjects()
+        # game_objects.draw(self.screen)
 
     def apply_screen_filter(self):
         """

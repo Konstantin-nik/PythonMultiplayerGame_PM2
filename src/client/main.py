@@ -20,8 +20,8 @@ def main():
     receive_thread = ReceiveThread(client_socket=client_socket, game_objects_lock=game_objects_lock)
     receive_thread.start()
 
-    game_thread = GameController(game_objects_lock=game_objects_lock)
-    game_thread.start()
+    game = GameController(game_objects_lock=game_objects_lock)
+    game.run()
 
 
 if __name__ == "__main__":
