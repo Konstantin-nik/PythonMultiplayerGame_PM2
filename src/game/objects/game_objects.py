@@ -14,19 +14,23 @@ class GameObjects:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self):
+    def init(self):
         self.objects: list[GameObject] = []
 
-    def draw(self):
+    def add_object(self, obj: GameObject):
+        self.objects.append(obj)
+
+    def draw(self, screen):
+        self.objects = sorted(self.objects)
         for obj in self.objects:
-            obj.draw()
+            obj.draw(screen)
 
     def update_objects(self, data: bytes):
         yaml_data = yaml.safe_load(data)
         self.objects = [GameObject(**game_object) for game_object in yaml_data]
 
     def update_game(self, client_socket: socket, action: Action):
-        player = filter(lambda obj: obj.)
+        player = filter(lambda obj: obj)
         match action:
             case MoveAction():
                 pass

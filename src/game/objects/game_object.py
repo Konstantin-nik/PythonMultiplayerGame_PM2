@@ -16,6 +16,5 @@ class GameObject:
     def __gt__(self, other):
         return self.z > other.z
 
-    def draw(self):
-        # TODO: If object has something to draw, then draw it on screen
+    def draw(self, screen):
         pass

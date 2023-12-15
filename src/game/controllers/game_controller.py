@@ -21,7 +21,7 @@ class GameController(Thread):
 
         # pygame setting
         self.screen = pygame.display.set_mode(size)
-        pygame.display.set_caption("Rotating Circle")
+        pygame.display.set_caption("Multiplayer Game")
         self.clock = pygame.time.Clock()
         self.running = True
         self.ticks = ticks
@@ -46,7 +46,7 @@ class GameController(Thread):
                         client_handler.send(MoveAction(Direction.RIGHT))
 
             # clean screen
-            self.screen.fill('black')
+            self.screen.fill('white')
 
             # draw scene background
             self.draw_map()
@@ -76,9 +76,8 @@ class GameController(Thread):
         Draws all objects.
         :return:
         """
-        with self.game_objects_lock:
-            game_objects = GameObjects()
-            game_objects.draw()
+        game_objects = GameObjects()
+        game_objects.draw(self.screen)
 
     def apply_screen_filter(self):
         """
