@@ -12,7 +12,7 @@ class ReceiveThread(Thread):
 
     def run(self):
         while True:
-            data = self.client_socket.recv(2048)
+            data = self.client_socket.recv(40000)
             if not data:
                 break
 
