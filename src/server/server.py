@@ -1,6 +1,9 @@
 import threading
 from socket import socket, AF_INET, SOCK_STREAM
 
+import pygame
+
+from src.game.constants.constants import PORT
 from src.server.client_thread import ClientThread
 
 
@@ -14,6 +17,7 @@ def main():
     client_list_lock = threading.Lock()
 
     game_objects_lock = threading.Lock()
+    pygame.init()
 
     while True:
         server.listen(1)

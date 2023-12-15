@@ -4,7 +4,6 @@ from src.game.constants.constants import IMAGE_PATH, COLORS, SHAPES, FONT_SIZE, 
 
 TO_SRC_PATH = ''
 
-
 class PlayerModel:
     def __init__(self, name, colors):
         font = pygame.font.SysFont(FONT_NAME, FONT_SIZE)  # Font and font size (None for default font)

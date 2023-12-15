@@ -3,6 +3,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 from receive_thread import ReceiveThread
 from src.client.client_handler import ClientHandler
+from src.game.constants.constants import PORT
 from src.game.controllers.game_controller import GameController
 from src.game.objects.game_objects import GameObjects
 

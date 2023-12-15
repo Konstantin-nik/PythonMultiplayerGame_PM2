@@ -27,6 +27,13 @@ class GameController(Thread):
         self.running = True
         self.ticks = ticks
 
+        # spawn a player
+
+        client_handler = ClientHandler()
+        player_name = input("Enter your name: ")
+        client_handler.send(SpawnAction(character_name=player_name, x=random.randint(100, 500), y=self.center.y,
+                                        colors=(random.sample(range(6), 3))))
+
     def run(self):
         while self.running:
 
@@ -34,20 +41,19 @@ class GameController(Thread):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-                # TODO: based on player input send actions to server
                 if event.type == pygame.KEYDOWN:
                     client_handler = ClientHandler()
-                    if event.key == pygame.K_w:
+                    if event.key == pygame.K_w or event.key == pygame.K_UP:
                         client_handler.send(MoveAction(Direction.UP))
-                    elif event.key == pygame.K_a:
+                    elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
                         client_handler.send(MoveAction(Direction.LEFT))
-                    elif event.key == pygame.K_s:
+                    elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                         client_handler.send(MoveAction(Direction.DOWN))
-                    elif event.key == pygame.K_d:
+                    elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                         client_handler.send(MoveAction(Direction.RIGHT))
-                    elif event.key == pygame.K_DOWN:
-                        game_objects = GameObjects()
-                        game_objects.objects[0].set_state('walk')
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    click_position = pygame.mouse.get_pos()
+                    client_handler.send(ShootAction(click_position))
 
             # clean screen
             self.screen.fill('white')
