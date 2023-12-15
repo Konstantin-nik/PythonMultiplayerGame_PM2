@@ -36,6 +36,11 @@ SHAPES = {
 }
 
 # states timers
-WALK_TIME = 1
+WALK_TIME = 0.3
 WALK_STATES = 3
-WALK_FRAMES_NUM = TICKS * WALK_TIME //WALK_STATES
+WALK_FRAMES_NUM = TICKS * WALK_TIME // WALK_STATES
+
+# states
+STATES = {
+    'walk': 1
+}

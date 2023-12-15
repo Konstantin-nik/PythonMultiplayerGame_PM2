@@ -1,4 +1,4 @@
-from src.game.constants.constants import WALK_FRAMES_NUM
+from src.game.constants.constants import WALK_FRAMES_NUM, STATES
 
 
 class PlayerState:
@@ -33,7 +33,13 @@ class PlayerState:
         else:
             self.current_score += 1
 
-        return  self.state
+        return self.state
 
     def __eq__(self, other):
         return self.state == other
+
+    def set_state(self, state_name):
+        if self.state != 0:
+            return
+
+        self.state = STATES[state_name]

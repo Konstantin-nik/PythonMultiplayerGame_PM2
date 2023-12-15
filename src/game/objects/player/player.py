@@ -20,6 +20,10 @@ class Player(GameObject):
 
     def draw(self, screen):
         self.player_model.draw(screen, self.state, self.x, self.y)
+        self.state.__next__()
+
+    def set_state(self, state_name):
+        self.state.set_state(state_name)
 
 
 

@@ -44,6 +44,9 @@ class GameController(Thread):
                         client_handler.send(MoveAction(Direction.DOWN))
                     elif event.key == pygame.K_d:
                         client_handler.send(MoveAction(Direction.RIGHT))
+                    elif event.key == pygame.K_DOWN:
+                        game_objects = GameObjects()
+                        game_objects.objects[0].set_state('walk')
 
             # clean screen
             self.screen.fill('white')
