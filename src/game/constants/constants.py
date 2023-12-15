@@ -1,6 +1,8 @@
 START_WINDOW_WIDTH = 1200
 START_WINDOW_HEIGHT = 800
 
+TICKS = 60
+
 IMAGE_PATH = 'src/assets/3x/'
 
 COLORS = [
@@ -32,3 +34,8 @@ SHAPES = {
     'legs': scale((120, 37)),
     'shadow': scale((175, 37)),
 }
+
+# states timers
+WALK_TIME = 1
+WALK_STATES = 3
+WALK_FRAMES_NUM = TICKS * WALK_TIME //WALK_STATES
