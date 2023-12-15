@@ -8,6 +8,7 @@ from src.game.objects.game_object import GameObject
 
 class GameObjects:
     _instance = None
+    _initialized = False
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -15,7 +16,9 @@ class GameObjects:
         return cls._instance
 
     def __init__(self):
-        self.objects: list[GameObject] = []
+        if not self._initialized:
+            self.objects: list[GameObject] = []
+            self._initialized = True
 
     def add_object(self, obj: GameObject):
         self.objects.append(obj)

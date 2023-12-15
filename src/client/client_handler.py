@@ -5,6 +5,7 @@ from src.client.actions import Action
 
 class ClientHandler:
     _instance = None
+    _initialized = False
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -12,7 +13,9 @@ class ClientHandler:
         return cls._instance
 
     def __init__(self, client_socket: socket = None):
-        self.client_socket = client_socket
+        if not self._initialized:
+            self.client_socket = client_socket
+            self._initialized = True
 
     def send(self, action: Action):
         self.client_socket.send(action.to_yaml())
