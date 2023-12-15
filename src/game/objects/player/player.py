@@ -22,6 +22,9 @@ class Player(GameObject):
         self.player_model.draw(screen, self.state, self.x, self.y)
         self.state.__next__()
 
+    def jump(self):
+        self.state.set_state('jump')
+
     def set_state(self, state_name):
         self.state.set_state(state_name)
 

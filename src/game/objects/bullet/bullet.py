@@ -1,48 +1,30 @@
 import json
 
+import pygame
+
+from src.game.constants.constants import SHAPES, IMAGE_PATH
 from src.game.objects.game_object import GameObject
 
 class Bullet(GameObject):
-    def __init__(self, x: float, y: float, z: int = 2, should_render: bool = True):
-        super().__init__(x, y, z)
+    def __init__(self, x: float, y: float, target_pos: (float, float), z: float = 2, should_render: bool = True):
+        super().__init__(x, y, 2)
 
-    def __eq__(self, other):
-        return (self.name == other.name) and (self.coords == other.coords) and (self.colors == other.colors)
+        self.bullet_img = pygame.image.load(IMAGE_PATH + 'bullet.png').convert_alpha()
+        self.bullet_img = pygame.transform.scale(self.bullet_img, SHAPES['bullet'])
 
     def draw(self, screen):
-        self.player_model.draw(screen, self.state, self.x, self.y)
-        self.state.__next__()
-
-    def set_state(self, state_name):
-        self.state.set_state(state_name)
+        screen.blit(self.bullet_img, (self.x, self.y))
 
     def __dict__(self):
         return {
-            'class_name': 'player',
-            'name': self.name,
-            'colors': self.colors,
-            'state': self.state.state,
+            'class_name': 'bullet',
             'x': self.x,
             'y': self.y,
             'z': self.z,
+            'target_pos': self.target_pos,
         }
-
-    def move(self, move_x, move_y):
-        self.x += move_x
-        self.y += move_y
-        self.state.set_state('walk')
 
     @classmethod
     def from_json(cls, dictionary):
-        return cls(name=dictionary['name'], colors=dictionary['colors'], x=dictionary['x'], y=dictionary['y'],
-                   z=dictionary['z'], state=dictionary['state'])
-
-# if __name__ == '__main__':
-# game = GameController()
-# game_objects = GameObjects()
-# player_1 = Player(name='Super_Stepa', x=game.center.x, y=game.center.y,
-#                   colors=(random.sample(range(6), 3)))
-
-# game_objects.add_object(player_1)
-
-# game.run()
+        return cls(x=dictionary['x'], y=dictionary['y'], z=dictionary['z'],
+                   target_pos=dictionary['target_pos'])

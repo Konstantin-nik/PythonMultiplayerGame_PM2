@@ -45,8 +45,13 @@ WALK_FRAMES_NUM = TICKS * WALK_TIME // WALK_STATES
 
 WALK_STEP_LENGTH = 20
 
+# states timers
+JUMP_TIME = 0.3
+JUMP_STATES = 4
+JUMP_FRAMES_NUM = TICKS * JUMP_TIME // JUMP_STATES
+
 # states
 STATES = {
     'walk': 100,
-    'jump': 200
+    'jump': 200,
 }

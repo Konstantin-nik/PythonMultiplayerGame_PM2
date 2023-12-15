@@ -1,4 +1,4 @@
-from src.game.constants.constants import WALK_FRAMES_NUM, STATES
+from src.game.constants.constants import WALK_FRAMES_NUM, STATES, JUMP_FRAMES_NUM
 
 
 class PlayerState:
@@ -15,10 +15,10 @@ class PlayerState:
             103: self.State(WALK_FRAMES_NUM, 0),
 
             # jump states
-            200: self.State(0, 201),
-            201: self.State(0, 202),
-            202: self.State(0, 203),
-            203: self.State(0, 0),
+            200: self.State(JUMP_FRAMES_NUM, 201),
+            201: self.State(JUMP_FRAMES_NUM, 202),
+            202: self.State(JUMP_FRAMES_NUM, 203),
+            203: self.State(JUMP_FRAMES_NUM, 0),
         }
         self.current_score = 0
 
