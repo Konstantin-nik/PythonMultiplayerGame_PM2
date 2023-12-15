@@ -5,8 +5,6 @@ from src.game.objects.game_object import GameObject
 class Bullet(GameObject):
     def __init__(self, x: float, y: float, z: int = 2, should_render: bool = True):
         super().__init__(x, y, z)
-        if should_render:
-            self.bullet_model = BulletModel(name, colors)
 
     def __eq__(self, other):
         return (self.name == other.name) and (self.coords == other.coords) and (self.colors == other.colors)
