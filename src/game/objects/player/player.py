@@ -4,6 +4,7 @@ from src.game.controllers.game_controller import GameController
 from src.game.objects.game_object import GameObject
 from src.game.objects.game_objects import GameObjects
 from src.game.objects.player.player_model import PlayerModel
+from src.game.objects.player.player_state import PlayerState
 
 
 class Player(GameObject):
@@ -12,7 +13,7 @@ class Player(GameObject):
         self.name = name
         self.colors = colors
         self.player_model = PlayerModel(name, colors)
-        self.state = 0
+        self.state = PlayerState()
 
     def __eq__(self, other):
         return (self.name == other.name) and (self.coords == other.coords) and (self.colors == other.colors)
