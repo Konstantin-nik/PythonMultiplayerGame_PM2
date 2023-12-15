@@ -36,4 +36,4 @@ class PlayerState:
         return  self.state
 
     def __eq__(self, other):
-        return self.state == other.state
+        return self.state == other

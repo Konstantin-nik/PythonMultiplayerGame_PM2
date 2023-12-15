@@ -2,7 +2,7 @@ import pygame
 
 from src.game.constants.constants import IMAGE_PATH, COLORS, SHAPES, FONT_SIZE, FONT_COLOR, FONT_ALPHA, FONT_NAME
 
-TO_SRC_PATH = '../../../../'
+TO_SRC_PATH = '../../../'
 
 
 class PlayerModel:
