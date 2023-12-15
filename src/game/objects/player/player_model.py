@@ -67,12 +67,12 @@ class PlayerModel:
         return new_image
 
     def draw(self, screen, state, x, y):
-        if state == 1:
-            self.set_1_state(x, y)
-        elif state == 2:
-            self.set_2_state(x, y)
-        elif state == 3:
-            self.set_3_state(x, y)
+        if state == 100:
+            self.set_100_state(x, y)
+        elif state == 101:
+            self.set_101_state(x, y)
+        elif state == 102:
+            self.set_102_state(x, y)
         else:
             self.set_0_state(x, y)
 
@@ -102,13 +102,17 @@ class PlayerModel:
         name_size = self.name.get_size()
         self.pos.name_pos = (x - name_size[0]/2*1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1]*0.9)
 
-    def set_1_state(self, x, y):
+    def set_100_state(self, x, y):
         self.set_0_state(x, y)
         self.pos.leg_1_pos = (self.pos.leg_1_pos[0], self.pos.leg_1_pos[1] - SHAPES['legs'][1]*0.3)
 
-    def set_2_state(self, x, y):
+    def set_101_state(self, x, y):
         self.set_0_state(x, y)
 
-    def set_3_state(self, x, y):
+    def set_102_state(self, x, y):
+        self.set_0_state(x, y)
+        self.pos.leg_2_pos = (self.pos.leg_2_pos[0], self.pos.leg_2_pos[1] - SHAPES['legs'][1]*0.3)
+
+    def set_103_state(self, x, y):
         self.set_0_state(x, y)
         self.pos.leg_2_pos = (self.pos.leg_2_pos[0], self.pos.leg_2_pos[1] - SHAPES['legs'][1]*0.3)

@@ -9,9 +9,16 @@ class PlayerState:
             0: (0, 0),
 
             # walk states
-            1: self.State(WALK_FRAMES_NUM, 2),
-            2: self.State(WALK_FRAMES_NUM, 3),
-            3: self.State(WALK_FRAMES_NUM, 0),
+            100: self.State(WALK_FRAMES_NUM, 101),
+            101: self.State(WALK_FRAMES_NUM, 102),
+            102: self.State(WALK_FRAMES_NUM, 103),
+            103: self.State(WALK_FRAMES_NUM, 0),
+
+            # jump states
+            200: self.State(0, 201),
+            201: self.State(0, 202),
+            202: self.State(0, 203),
+            203: self.State(0, 0),
         }
         self.current_score = 0
 
@@ -42,4 +49,4 @@ class PlayerState:
         if self.state != 0:
             return
 
-        self.state = STATES[state_name]
+        self.state = STATES.get(state_name)

@@ -42,5 +42,6 @@ WALK_FRAMES_NUM = TICKS * WALK_TIME // WALK_STATES
 
 # states
 STATES = {
-    'walk': 1
+    'walk': 100,
+    'jump': 200
 }
