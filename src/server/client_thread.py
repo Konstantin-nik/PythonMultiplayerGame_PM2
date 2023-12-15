@@ -1,12 +1,8 @@
-import random
 from socket import socket
 from threading import Thread, Lock
 
-import json
-
 from src.client.actions import Action
 from src.game.objects.game_objects import GameObjects
-from src.game.objects.player.player import Player
 
 
 class ClientThread(Thread):
@@ -30,9 +26,10 @@ class ClientThread(Thread):
                 game_objects.update_game(self.client_socket, action)
 
             json_objects = game_objects.to_json()
-            print(json_objects)
-            t1 = Thread(target=self.send_to_clients, args=[json_objects])
-            t1.start()
+
+            self.send_to_clients(json_objects)
+            # t1 = Thread(target=self.send_to_clients, args=[json_objects])
+            # t1.start()
 
     def send_to_clients(self, data):
         with self.client_list_lock:
