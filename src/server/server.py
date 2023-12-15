@@ -5,7 +5,7 @@ from src.server.client_thread import ClientThread
 
 
 def main():
-    server_address = ("127.0.0.1", 12345)
+    server_address = ("127.0.0.1", PORT)
     server = socket(AF_INET, SOCK_STREAM)
     server.bind(server_address)
     print("Server started")

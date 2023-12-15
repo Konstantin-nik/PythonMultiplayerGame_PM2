@@ -51,8 +51,8 @@ class MoveAction(Action):
     def from_yaml_data(cls, data: dict):
         return cls(direction=Direction.from_yaml_repr(data['direction']))
 
-    def to_yaml(self) -> bytes:
-        return yaml.dump({'name': self.name, 'direction': self.direction.to_yaml_rep()}).encode()
+    def to_json(self) -> bytes:
+        return json.dumps({'name': self.name, 'direction': self.direction.to_json_rep()}).encode()
 
 
 class ShootAction(Action):

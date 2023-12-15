@@ -18,7 +18,7 @@ class ClientHandler:
             self._initialized = True
 
     def send(self, action: Action):
-        self.client_socket.send(action.to_yaml())
+        self.client_socket.send(action.to_json())
 
     def close(self):
         self.client_socket.close()

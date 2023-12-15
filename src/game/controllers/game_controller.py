@@ -1,15 +1,16 @@
+import random
 from threading import Thread, Lock
 
 import pygame
 
-from src.client.actions import MoveAction, Direction
+from src.client.actions import MoveAction, Direction, SpawnAction, ShootAction
 from src.client.client_handler import ClientHandler
 from src.game.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT, TICKS
 from src.game.objects.game_objects import GameObjects
 
 
 class GameController(Thread):
-    def __init__(self, *,  game_objects_lock: Lock, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=TICKS):
+    def __init__(self, *, game_objects_lock: Lock, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=TICKS):
         super().__init__()
         pygame.init()
 

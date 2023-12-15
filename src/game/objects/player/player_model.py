@@ -2,7 +2,7 @@ import pygame
 
 from src.game.constants.constants import IMAGE_PATH, COLORS, SHAPES, FONT_SIZE, FONT_COLOR, FONT_ALPHA, FONT_NAME
 
-TO_SRC_PATH = '../../../'
+TO_SRC_PATH = ''
 
 
 class PlayerModel:
@@ -17,6 +17,17 @@ class PlayerModel:
         self.leg_1 = pygame.image.load(TO_SRC_PATH + IMAGE_PATH + 'leg_1.png').convert_alpha()
         self.leg_2 = pygame.image.load(TO_SRC_PATH + IMAGE_PATH + 'leg_2.png').convert_alpha()
         self.shadow = pygame.image.load(TO_SRC_PATH + IMAGE_PATH + 'shadow.png').convert_alpha()
+        self.state_func_dict = {
+            0: self.set_0_state,
+            100: self.set_100_state,
+            101: self.set_101_state,
+            102: self.set_102_state,
+            103: self.set_103_state,
+            200: self.set_200_state,
+            201: self.set_201_state,
+            202: self.set_202_state,
+            203: self.set_203_state,
+        }
 
         self.pos = self.ModelPos()
 
@@ -116,3 +127,15 @@ class PlayerModel:
     def set_103_state(self, x, y):
         self.set_0_state(x, y)
         self.pos.leg_2_pos = (self.pos.leg_2_pos[0], self.pos.leg_2_pos[1] - SHAPES['legs'][1]*0.3)
+
+    def set_200_state(self, x, y):
+        pass
+
+    def set_201_state(self, x, y):
+        pass
+
+    def set_202_state(self, x, y):
+        pass
+
+    def set_203_state(self, x, y):
+        pass

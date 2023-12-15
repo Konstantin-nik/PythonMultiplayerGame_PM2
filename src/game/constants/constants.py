@@ -33,12 +33,15 @@ SHAPES = {
     'body': scale((150, 140)),
     'legs': scale((120, 37)),
     'shadow': scale((175, 37)),
+    'bullet': scale((25, 10))
 }
 
 # states timers
 WALK_TIME = 0.3
 WALK_STATES = 3
 WALK_FRAMES_NUM = TICKS * WALK_TIME // WALK_STATES
+
+WALK_STEP_LENGTH = 20
 
 # states
 STATES = {

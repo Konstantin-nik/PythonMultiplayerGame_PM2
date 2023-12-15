@@ -10,7 +10,7 @@ from src.game.objects.game_objects import GameObjects
 def main():
     client_socket = socket(AF_INET, SOCK_STREAM)
 
-    client_socket.connect(("127.0.0.1", 12345))
+    client_socket.connect(("127.0.0.1", PORT))
 
     _game_objects = GameObjects()
     game_objects_lock = threading.Lock()
