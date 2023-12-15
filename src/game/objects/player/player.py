@@ -48,13 +48,3 @@ class Player(GameObject):
     def from_json(cls, dictionary):
         return cls(name=dictionary['name'], colors=dictionary['colors'], x=dictionary['x'], y=dictionary['y'],
                    z=dictionary['z'], state=dictionary['state'])
-
-# if __name__ == '__main__':
-# game = GameController()
-# game_objects = GameObjects()
-# player_1 = Player(name='Super_Stepa', x=game.center.x, y=game.center.y,
-#                   colors=(random.sample(range(6), 3)))
-
-# game_objects.add_object(player_1)
-
-# game.run()

@@ -2,7 +2,7 @@ from socket import socket
 
 import json
 
-from src.client.actions import Action, MoveAction, ShootAction, TalkAction, SpawnAction, Direction
+from src.client.actions import Action, MoveAction, ShootAction, TalkAction, SpawnAction, JumpAction, Direction
 from src.game.constants.constants import WALK_STEP_LENGTH
 from src.game.objects.game_object import GameObject
 from src.game.objects.player.player import Player
@@ -62,9 +62,12 @@ class GameObjects:
                     case Direction.RIGHT:
                         self.players[client_socket].move(WALK_STEP_LENGTH, 0)
             case ShootAction():
-                self.objects.append()
+                pass
+                # self.objects.append()
             case TalkAction():
                 pass
+            case JumpAction():
+                self.players[client_socket].jump()
             case SpawnAction():
                 pl = Player(name=action.character_name, x=action.x, y=action.y,
                             colors=action.colors, should_render=False)

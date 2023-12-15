@@ -92,3 +92,14 @@ class SpawnAction(Action):
 
     def to_json(self) -> bytes:
         return json.dumps({'name': self.name} | self.__dict__).encode()
+
+
+class JumpAction(Action):
+    name = 'Jump'
+
+    @classmethod
+    def from_json_data(cls, data: dict):
+        return cls()
+
+    def to_json(self):
+        return json.dumps({'name': self.name}).encode()

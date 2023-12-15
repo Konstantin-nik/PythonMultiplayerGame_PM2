@@ -3,7 +3,7 @@ from threading import Thread, Lock
 
 import pygame
 
-from src.client.actions import MoveAction, Direction, SpawnAction, ShootAction
+from src.client.actions import MoveAction, Direction, SpawnAction, ShootAction, JumpAction
 from src.client.client_handler import ClientHandler
 from src.game.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT, TICKS
 from src.game.objects.game_objects import GameObjects
@@ -36,13 +36,12 @@ class GameController(Thread):
 
     def run(self):
         while self.running:
-
+            client_handler = ClientHandler()
             # events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
                 if event.type == pygame.KEYDOWN:
-                    client_handler = ClientHandler()
                     if event.key == pygame.K_w or event.key == pygame.K_UP:
                         client_handler.send(MoveAction(Direction.UP))
                     elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
@@ -51,6 +50,8 @@ class GameController(Thread):
                         client_handler.send(MoveAction(Direction.DOWN))
                     elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                         client_handler.send(MoveAction(Direction.RIGHT))
+                    elif event.key == pygame.K_SPACE:
+                        client_handler.send(JumpAction())
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     click_position = pygame.mouse.get_pos()
                     client_handler.send(ShootAction(click_position))
