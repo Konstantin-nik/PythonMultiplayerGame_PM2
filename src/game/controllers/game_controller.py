@@ -10,9 +10,12 @@ from src.game.objects.game_objects import GameObjects
 
 
 class GameController(Thread):
-    def __init__(self, *, game_objects_lock: Lock, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=TICKS):
+    def __init__(self, *, game_objects_lock: Lock, size=(START_WINDOW_WIDTH, START_WINDOW_HEIGHT), ticks=TICKS,
+                 user='client'):
         super().__init__()
         pygame.init()
+
+        self.user = user
 
         self.game_objects_lock = game_objects_lock
 
@@ -29,32 +32,35 @@ class GameController(Thread):
 
         # spawn a player
 
-        client_handler = ClientHandler()
-        player_name = input("Enter your name: ")
-        client_handler.send(SpawnAction(character_name=player_name, x=random.randint(100, 500), y=self.center.y,
-                                        colors=(random.sample(range(6), 3))))
+        if user == 'client':
+            client_handler = ClientHandler()
+            player_name = input("Enter your name: ")
+            client_handler.send(SpawnAction(character_name=player_name, x=random.randint(100, 500), y=self.center.y,
+                                            colors=(random.sample(range(6), 3))))
 
     def run(self):
         while self.running:
-            client_handler = ClientHandler()
+            if self.user == 'client':
+                client_handler = ClientHandler()
             # events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_w or event.key == pygame.K_UP:
-                        client_handler.send(MoveAction(Direction.UP))
-                    elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                        client_handler.send(MoveAction(Direction.LEFT))
-                    elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                        client_handler.send(MoveAction(Direction.DOWN))
-                    elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                        client_handler.send(MoveAction(Direction.RIGHT))
-                    elif event.key == pygame.K_SPACE:
-                        client_handler.send(JumpAction())
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    click_position = pygame.mouse.get_pos()
-                    client_handler.send(ShootAction(click_position))
+                if self.user == 'client':
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_w or event.key == pygame.K_UP:
+                            client_handler.send(MoveAction(Direction.UP))
+                        elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                            client_handler.send(MoveAction(Direction.LEFT))
+                        elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                            client_handler.send(MoveAction(Direction.DOWN))
+                        elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                            client_handler.send(MoveAction(Direction.RIGHT))
+                        elif event.key == pygame.K_SPACE:
+                            client_handler.send(JumpAction())
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        click_position = pygame.mouse.get_pos()
+                        client_handler.send(ShootAction(click_position))
 
             # clean screen
             self.screen.fill('white')

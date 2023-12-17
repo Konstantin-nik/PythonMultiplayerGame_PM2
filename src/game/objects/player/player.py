@@ -12,7 +12,10 @@ class Player(GameObject):
         self.name = name
         self.colors = colors
         if should_render:
-            self.player_model = PlayerModel(name, colors)
+            path = ''
+        else:
+            path = '../../'
+        self.player_model = PlayerModel(name, colors, path)
         self.state = PlayerState(state)
 
     def __eq__(self, other):
