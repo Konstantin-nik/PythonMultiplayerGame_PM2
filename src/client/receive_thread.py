@@ -1,6 +1,7 @@
 from socket import socket
 from threading import Lock, Thread
 
+from src.common.tools.data_sharing_tool import DataSharingTool
 from src.game.objects.game_objects import GameObjects
 
 
@@ -11,14 +12,22 @@ class ReceiveThread(Thread):
         self.game_objects_lock = game_objects_lock
 
     def run(self):
+        data_sharing_tool = DataSharingTool()
         while True:
-            data = self.client_socket.recv(40000)
+            data = self.client_socket.recv(2048)
             if not data:
                 break
 
-            game_objects = GameObjects()
+            data_sharing_tool.add_data(data=data.decode())
 
-            with self.game_objects_lock:
-                game_objects.update_objects(data)
+            for ans in data_sharing_tool:
+                if ans is None:
+                    continue
+
+                name, obj = ans
+                game_objects = GameObjects()
+
+                with self.game_objects_lock:
+                    game_objects.update_objects(obj)
 
         self.client_socket.close()

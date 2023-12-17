@@ -3,7 +3,7 @@ from threading import Thread, Lock
 
 import pygame
 
-from src.client.actions import MoveAction, Direction, SpawnAction, ShootAction, JumpAction
+from src.common.actions import MoveAction, Direction, SpawnAction, ShootAction, JumpAction
 from src.client.client_handler import ClientHandler
 from src.game.constants.constants import START_WINDOW_WIDTH, START_WINDOW_HEIGHT, TICKS
 from src.game.objects.game_objects import GameObjects

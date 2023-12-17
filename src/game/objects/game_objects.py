@@ -2,7 +2,7 @@ from socket import socket
 
 import json
 
-from src.client.actions import Action, MoveAction, ShootAction, TalkAction, SpawnAction, JumpAction, Direction
+from src.common.actions import Action, MoveAction, ShootAction, TalkAction, SpawnAction, JumpAction, Direction
 from src.game.constants.constants import WALK_STEP_LENGTH
 from src.game.objects.game_object import GameObject
 from src.game.objects.player.player import Player
@@ -11,12 +11,12 @@ from src.game.objects.player.player import Player
 class GameObjects:
     _instance = None
     _initialized = False
+    NAME = 'GameObjects'
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super().__new__(cls)
         return cls._instance
-
 
     def __init__(self):
         if not self._initialized:
@@ -38,9 +38,7 @@ class GameObjects:
             arr.append(obj.__dict__())
         return json.dumps(arr)
 
-    def update_objects(self, data: bytes):
-        json_data = json.loads(data)
-
+    def update_objects(self, json_data: dict):
         arr = []
         for d in json_data:
             match d['class_name']:
@@ -48,6 +46,10 @@ class GameObjects:
                     arr.append(Player.from_json(d))
 
         self.objects = arr
+
+    @classmethod
+    def from_json(cls, json_str: str):
+        return json.loads(json_str)
 
     def update_game(self, client_socket: socket, action: Action):
         match action:

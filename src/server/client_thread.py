@@ -1,7 +1,8 @@
 from socket import socket
 from threading import Thread, Lock
 
-from src.client.actions import Action
+from src.common.actions import is_action
+from src.common.tools.data_sharing_tool import DataSharingTool
 from src.game.objects.game_objects import GameObjects
 
 
@@ -15,17 +16,25 @@ class ClientThread(Thread):
         self.game_objects_lock = game_objects_lock
 
     def run(self):
+        data_sharing_tool = DataSharingTool()
         while True:
-            data = self.client_socket.recv(40000)
+            data = self.client_socket.recv(2048)
             if not data:
                 break
 
-            action = Action.from_json(data)
-            with self.game_objects_lock:
-                game_objects = GameObjects()
-                game_objects.update_game(self.client_socket, action)
+            data_sharing_tool.add_data(data=data.decode())
 
-            json_objects = game_objects.to_json()
+            for ans in data_sharing_tool:
+                if ans is None:
+                    continue
+
+                name, obj = ans
+                if is_action(name):
+                    with self.game_objects_lock:
+                        game_objects = GameObjects()
+                        game_objects.update_game(self.client_socket, obj)
+
+            json_objects = DataSharingTool.to_json(game_objects)
 
             self.send_to_clients(json_objects)
             # t1 = Thread(target=self.send_to_clients, args=[json_objects])

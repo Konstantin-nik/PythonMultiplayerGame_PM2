@@ -1,7 +1,10 @@
 START_WINDOW_WIDTH = 1200
 START_WINDOW_HEIGHT = 800
 
-PORT = 12341
+PORT = 12340
+
+DATA_START_STRING = 'spec-data-start-string'
+DATA_END_STRING = 'spec-data-end-string'
 
 TICKS = 60
 

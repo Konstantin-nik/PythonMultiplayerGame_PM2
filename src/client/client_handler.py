@@ -1,6 +1,7 @@
 from socket import socket
 
-from src.client.actions import Action
+from src.common.actions import Action
+from src.common.tools.data_sharing_tool import DataSharingTool
 
 
 class ClientHandler:
@@ -18,7 +19,7 @@ class ClientHandler:
             self._initialized = True
 
     def send(self, action: Action):
-        self.client_socket.send(action.to_json())
+        self.client_socket.send(DataSharingTool.to_json(action).encode())
 
     def close(self):
         self.client_socket.close()
