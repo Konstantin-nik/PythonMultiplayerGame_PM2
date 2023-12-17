@@ -104,10 +104,11 @@ class PlayerModel:
         self.pos.leg_2_pos = self.pos.leg_1_pos
         self.pos.body_pos = (x - SHAPES['body'][0] / 2, y - SHAPES['body'][1] - SHAPES['legs'][1] * 0.8)
         self.pos.head_pos = (
-        self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36)
+            self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36)
+
         self.pos.hood_pos = self.pos.head_pos
         self.pos.eyes_pos = (
-        self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25)
+            self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25)
 
         name_size = self.name.get_size()
         self.pos.name_pos = (x - name_size[0] / 2 * 1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1] * 0.9)
@@ -132,19 +133,21 @@ class PlayerModel:
 
     def set_201_state(self, x, y):
         move_y = 30
+
         self.pos.shadow_pos = (x - SHAPES['shadow'][0] / 2, y - SHAPES['shadow'][1] / 2)
         self.pos.leg_1_pos = (x - SHAPES['legs'][0] / 2, y - SHAPES['legs'][1] - move_y)
         self.pos.leg_2_pos = self.pos.leg_1_pos
         self.pos.body_pos = (x - SHAPES['body'][0] / 2, y - SHAPES['body'][1] - SHAPES['legs'][1] * 0.8 - move_y)
         self.pos.head_pos = (
-        self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36 - move_y)
+            self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36)
+
         self.pos.hood_pos = self.pos.head_pos
         self.pos.eyes_pos = (
-        self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25 - move_y)
+            self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25)
 
         name_size = self.name.get_size()
         self.pos.name_pos = (
-        x - name_size[0] / 2 * 1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1] * 0.9 - move_y)
+            x - name_size[0] / 2 * 1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1] * 0.9 - move_y)
 
     def set_202_state(self, x, y):
         move_y = 60
@@ -153,27 +156,14 @@ class PlayerModel:
         self.pos.leg_2_pos = self.pos.leg_1_pos
         self.pos.body_pos = (x - SHAPES['body'][0] / 2, y - SHAPES['body'][1] - SHAPES['legs'][1] * 0.8 - move_y)
         self.pos.head_pos = (
-        self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36 - move_y)
+            self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36)
         self.pos.hood_pos = self.pos.head_pos
         self.pos.eyes_pos = (
-        self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25 - move_y)
+            self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25)
 
         name_size = self.name.get_size()
         self.pos.name_pos = (
-        x - name_size[0] / 2 * 1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1] * 0.9 - move_y)
+            x - name_size[0] / 2 * 1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1] * 0.9 - move_y)
 
     def set_203_state(self, x, y):
-        move_y = 30
-        self.pos.shadow_pos = (x - SHAPES['shadow'][0] / 2, y - SHAPES['shadow'][1] / 2)
-        self.pos.leg_1_pos = (x - SHAPES['legs'][0] / 2, y - SHAPES['legs'][1] - move_y)
-        self.pos.leg_2_pos = self.pos.leg_1_pos
-        self.pos.body_pos = (x - SHAPES['body'][0] / 2, y - SHAPES['body'][1] - SHAPES['legs'][1] * 0.8 - move_y)
-        self.pos.head_pos = (
-        self.pos.body_pos[0] - SHAPES['head'][0] * 0.4, self.pos.body_pos[1] - SHAPES['head'][1] * 0.36 - move_y)
-        self.pos.hood_pos = self.pos.head_pos
-        self.pos.eyes_pos = (
-        self.pos.head_pos[0] + SHAPES['head'][0] * 0.1, self.pos.head_pos[1] + SHAPES['head'][1] * 0.25 - move_y)
-
-        name_size = self.name.get_size()
-        self.pos.name_pos = (
-        x - name_size[0] / 2 * 1.1, y - name_size[1] - SHAPES['body'][1] - SHAPES['head'][1] * 0.9 - move_y)
+        self.set_201_state(x, y)
